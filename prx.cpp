@@ -93,7 +93,7 @@ PRX_EXPORT float AddTwoFloats(float f1, float f2)
 PRX_EXPORT int FreeUnjail(void)
 {
 	struct thread td;
-	return Sys::kexec((void *)&unjail702, &td);
+	return Sys::kexec((void *)&unjail, &td);
 
 }
 

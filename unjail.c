@@ -1,5 +1,7 @@
 #include "unjail.h"
 
+#include "fw_defines.h"
+
 #define X86_CR0_WP (1 << 16)
 
 
@@ -10,7 +12,7 @@ unsigned int long long __readmsr(unsigned long __register) {
 	return (((unsigned int long long)__edx) << 32) | (unsigned int long long)__eax;
 }
 
-void  *unjail702(struct thread *td){
+void  *unjail(struct thread *td){
 
         struct ucred* cred;
         struct filedesc* fd;
@@ -18,10 +20,10 @@ void  *unjail702(struct thread *td){
         fd = td->td_proc->p_fd;
         cred = td->td_proc->p_ucred;
 
-        void* kernel_base = &((uint8_t*)__readmsr(0xC0000082))[-0x000001C0];
+        void* kernel_base = &((uint8_t*)__readmsr(0xC0000082))[-K702_XFAST_SYSCALL];
         uint8_t* kernel_ptr = (uint8_t*)kernel_base;
-        void** got_prison0 =   (void**)&kernel_ptr[0x0113E398];
-        void** got_rootvnode = (void**)&kernel_ptr[0x022C5750];
+        void** got_prison0 =   (void**)&kernel_ptr[K702_PRISON_0];
+        void** got_rootvnode = (void**)&kernel_ptr[K702_ROOTVNODE];
 
         cred->cr_uid = 0;
         cred->cr_ruid = 0;

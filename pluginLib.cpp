@@ -7,6 +7,6 @@ extern "C" {
 int FreeUnjail(void)
 {
 	struct thread td;
-	return Sys::kexec((void *)&unjail702, &td);
+	return Sys::kexec((void *)&unjail, &td);
 
 }

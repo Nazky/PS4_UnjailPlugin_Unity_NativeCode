@@ -45,4 +45,4 @@ struct thread {
 struct kpayload_args { uint64_t user_arg; };
 struct kdump_args { uint64_t argArrayPtr; };
 
-void  *unjail702(struct thread *td);
+void  *unjail(struct thread *td);
