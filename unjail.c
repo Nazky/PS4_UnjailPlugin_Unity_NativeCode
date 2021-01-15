@@ -20,10 +20,10 @@ void  *unjail(struct thread *td){
         fd = td->td_proc->p_fd;
         cred = td->td_proc->p_ucred;
 
-        void* kernel_base = &((uint8_t*)__readmsr(0xC0000082))[-K755_XFAST_SYSCALL];
+        void* kernel_base = &((uint8_t*)__readmsr(0xC0000082))[-K800_XFAST_SYSCALL];
         uint8_t* kernel_ptr = (uint8_t*)kernel_base;
-        void** got_prison0 =   (void**)&kernel_ptr[K755_PRISON_0];
-        void** got_rootvnode = (void**)&kernel_ptr[K755_ROOTVNODE];
+        void** got_prison0 =   (void**)&kernel_ptr[K800_PRISON_0];
+        void** got_rootvnode = (void**)&kernel_ptr[K800_ROOTVNODE];
 
         cred->cr_uid = 0;
         cred->cr_ruid = 0;
